@@ -4,18 +4,22 @@ import base, { firebaseApp } from "../../js/Base";
 import "./Login.css";
 
 class Login extends React.Component {
-	state = {
-		uid: null,
-		userData: null,
-	};
+
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.authHandler({ user });
+			}
+		});
+	}
 
 	authHandler = async authData => {
 		const userData = await base.fetch(authData.user.uid, { context: this });
-		this.setState({
-			uid: authData.user.uid,
-			userData,
-		});
 		console.log(this.props);
+		this.props.updateUser({
+			uid: authData.user.uid,
+			userData: authData.user,
+		});
 		
 		this.props.history.push('/welcome');
 	};
@@ -35,7 +39,7 @@ class Login extends React.Component {
 					<img src="/images/blum-logo.png" alt="blum logo" />		
 				</div>
 				<div className="login-tagline">
-					A <b>Blüm</b> a day keeps the doctor away.
+					A <b>Blüm</b> a day<br /> keeps the doctor away.
 				</div>
 				<div className="login-about">
 					<b>Blüm</b> supports parents as their child grows.Aswell as allowing the creation of a private day-to-day album of 1-second videos documenting your childs development, <b>Blüm</b> also provides parents with key <b>developmental milestones</b> and care information to make sure they feel supported through that important stage of life.

@@ -12,22 +12,18 @@ class Router extends React.Component {
 	state = {
 		uid: null,
 		userData: null,
-	};
+	};	
 
-	componentDidMount() {
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.authHandler({ user });
-			}
-		});
+	updateUser = userData => {
+		this.setState(userData);
 	}
 
 	render() {
 		return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={routeProps => <Login {...routeProps} authenticate={this.authenticate}></Login>}  />
-				<Route path="/welcome" component={Welcome} user={this.state.user} />
+				<Route exact path="/" component={routeProps => <Login {...routeProps} {...this.state} updateUser={this.updateUser} ></Login>}  />
+				<Route path="/welcome" component={routeProps => <Welcome {...routeProps} displayName={this.state.userData ? this.state.userData.displayName : ''} ></Welcome>} user={this.state.user} />
 				<Route path="/Setup" component={Setup} user={this.state.user} />
 				<Route path="/celendar" component={Celendar} user={this.state.user} />
 			</Switch>

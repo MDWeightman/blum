@@ -1,0 +1,51 @@
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.welcome-splash {
+    position: relative;
+    text-align: center;
+}
+
+.welcome-splash-name {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 15%;
+    width: 100%;
+}
+
+.welcome-splash-name-text {
+    font-size: 24px;
+    padding: 12px 24px;
+    background: #ffffff;
+    color: #00CCCC;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0px 2px 3px 0px #cccccc;
+}
+
+.welcome-splash img {
+    width: 100%;
+    flex: 0 0 auto;
+}
+.welcome-get-started {
+    width: 80%;
+}
+
+
+
+.welcome-get-started button.get-started{
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    border: 0px;
+    font-size: 18px;
+    color: #ffffff;
+    background: #00CCCC;
+}
